@@ -20,7 +20,9 @@ public class SocketHandler {
             int data;
             in.transferTo(out);
             while ((data = in.read()) != -1) {
+                log.info("test: {}", data);
                 out.write(transmogrify.apply(data));
+                log.info("test trans: {}", transmogrify.apply(data));
             }
         } catch (IOException ex) {
             log.info(ex.getMessage());
