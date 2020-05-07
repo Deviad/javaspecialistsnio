@@ -18,7 +18,7 @@ public class SocketHandler {
     public BiConsumer<Socket, UnaryOperator<Integer>> HANDLE = (s, transmogrify)-> {
         try (s; InputStream in = s.getInputStream(); OutputStream out = s.getOutputStream()) {
             int data;
-            in.transferTo(out);
+
             while ((data = in.read()) != -1) {
                 log.info("test: {}", data);
                 out.write(transmogrify.apply(data));
