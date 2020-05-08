@@ -26,7 +26,4 @@ public class MultiThreadedBlockingServer {
         handler.handle(s);
     }
   }
-
-  @SneakyThrows
-  public static void handle(Socket s) {}
 }
