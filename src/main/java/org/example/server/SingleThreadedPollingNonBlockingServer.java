@@ -3,13 +3,9 @@ package org.example.server;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.example.handler.Handler;
-import org.example.handler.PrintingHandler;
 import org.example.handler.TransmogrifyChannelHandler;
-import org.example.handler.TransmogrifyHandler;
 
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
@@ -28,15 +24,15 @@ public class SingleThreadedPollingNonBlockingServer {
     Collection<SocketChannel> sockets = new ArrayList<>();
     while (true) {
       SocketChannel sc = ssc.accept();
-      if(sc != null) {
+      if (sc != null) {
         sockets.add(sc);
         log.info("Connected to " + sc);
         sc.configureBlocking(false);
       }
       for (SocketChannel socket : sockets) {
-          if(socket.isConnected()) {
-            handler.handle(socket);
-          }
+        if (socket.isConnected()) {
+          handler.handle(socket);
+        }
       }
       sockets.removeIf(socketChannel -> !socketChannel.isConnected());
     }

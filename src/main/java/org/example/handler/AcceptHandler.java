@@ -15,14 +15,15 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @Slf4j
 @RequiredArgsConstructor
 public class AcceptHandler implements Handler<SelectionKey> {
-    private final Map<SocketChannel, Queue<ByteBuffer>> pendingData;
-    @Override
-    public void handle(SelectionKey selectionKey) throws IOException {
-        ServerSocketChannel ssc = (ServerSocketChannel) selectionKey.channel();
-        SocketChannel sc = ssc.accept();
-        log.info("Connected to " + sc);
-        pendingData.put(sc, new ConcurrentLinkedQueue<>());
-        sc.configureBlocking(false);
-        sc.register(selectionKey.selector(), SelectionKey.OP_READ);
-    }
+  private final Map<SocketChannel, Queue<ByteBuffer>> pendingData;
+
+  @Override
+  public void handle(SelectionKey selectionKey) throws IOException {
+    ServerSocketChannel ssc = (ServerSocketChannel) selectionKey.channel();
+    SocketChannel sc = ssc.accept();
+    log.info("Connected to " + sc);
+    pendingData.put(sc, new ConcurrentLinkedQueue<>());
+    sc.configureBlocking(false);
+    sc.register(selectionKey.selector(), SelectionKey.OP_READ);
+  }
 }

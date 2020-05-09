@@ -13,17 +13,16 @@ import java.util.concurrent.Executors;
 
 @Slf4j
 public class ExecutorServiceBlockingHandler {
-    @SneakyThrows
-    public static void main(String[] args) {
-        ServerSocket ss = new ServerSocket(8080);
+  @SneakyThrows
+  public static void main(String[] args) {
+    ServerSocket ss = new ServerSocket(8080);
     Handler<Socket> handler =
         new ExecutorServiceHandler<>(
-            new PrintingHandler<>(new TransmogrifyHandler()),
-            Executors.newFixedThreadPool(10));
+            new PrintingHandler<>(new TransmogrifyHandler()), Executors.newFixedThreadPool(10));
 
-        while (true) {
-            Socket s = ss.accept();
-            handler.handle(s);
-        }
+    while (true) {
+      Socket s = ss.accept();
+      handler.handle(s);
     }
+  }
 }

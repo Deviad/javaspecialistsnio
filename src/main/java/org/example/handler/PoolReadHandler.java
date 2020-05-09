@@ -35,7 +35,7 @@ public class PoolReadHandler implements Handler<SelectionKey> {
           () -> {
             Util.transmogrify(buf);
             pendingData.get(sc).add(buf);
-            selectorActions.add(()->selectionKey.interestOps(SelectionKey.OP_WRITE));
+            selectorActions.add(() -> selectionKey.interestOps(SelectionKey.OP_WRITE));
             selectionKey.selector().wakeup();
           });
     }

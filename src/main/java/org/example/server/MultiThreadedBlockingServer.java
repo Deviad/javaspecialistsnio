@@ -23,7 +23,7 @@ public class MultiThreadedBlockingServer {
 
     while (true) {
       Socket s = ss.accept();
-        handler.handle(s);
+      handler.handle(s);
     }
   }
 }

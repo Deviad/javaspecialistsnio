@@ -11,12 +11,12 @@ public class Util {
   public int transmogrify(int data) {
     return Character.isLetter(data) ? data ^ ' ' : data;
   }
+
   public void transmogrify(ByteBuffer buff) {
     log.info("Transmogrification done by " + Thread.currentThread());
     buff.flip();
-    for (int i=0; i<buff.limit(); i++) {
+    for (int i = 0; i < buff.limit(); i++) {
       buff.put(i, (byte) transmogrify(buff.get(i)));
-
     }
   }
 }

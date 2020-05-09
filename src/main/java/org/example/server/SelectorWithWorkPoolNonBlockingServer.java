@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.handler.AcceptHandler;
 import org.example.handler.Handler;
 import org.example.handler.PoolReadHandler;
-import org.example.handler.ReadHandler;
 import org.example.handler.WriteHandler;
 
 import java.net.InetSocketAddress;
@@ -14,7 +13,6 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
@@ -59,9 +57,10 @@ public class SelectorWithWorkPoolNonBlockingServer {
       }
     }
   }
+
   public static void processSelectorActions(Queue<Runnable> selectorActions) {
     Runnable action;
-    while((action = selectorActions.poll()) != null) {
+    while ((action = selectorActions.poll()) != null) {
       action.run();
     }
   }

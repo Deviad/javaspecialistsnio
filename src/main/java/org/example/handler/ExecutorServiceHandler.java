@@ -19,9 +19,8 @@ public class ExecutorServiceHandler<S> extends DecoratedHandler<S> {
   }
 
   public ExecutorServiceHandler(Handler<S> other, ExecutorService pool) {
-    this(other, pool, (t, e)-> log.info("uncaught: " + t + " error " + e));
+    this(other, pool, (t, e) -> log.info("uncaught: " + t + " error " + e));
   }
-
 
   @Override
   public void handle(S s) {

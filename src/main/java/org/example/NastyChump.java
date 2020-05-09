@@ -12,10 +12,10 @@ public class NastyChump {
   public static void main(String[] args) {
     Socket[] socket = new Socket[20000];
     for (int i = 0; i < socket.length; i++) {
-     try {
-       socket[i] = new Socket("localhost", 8080);
-     } catch (IOException e) {
-       e.printStackTrace();
+      try {
+        socket[i] = new Socket("localhost", 8080);
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     }
     Thread.sleep(100_000);
